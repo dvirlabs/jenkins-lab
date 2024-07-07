@@ -19,8 +19,9 @@ pipeline {
     }
   }
 
+  // Move the credentials section here
   credentials {
-    usernamePassword(credentialsId: 'docker-hub-credentials', username: 'USERNAME', password: 'PASSWORD')
+    usernamePassword(credentialsId: 'Docker', username: 'USERNAME', password: 'USERNAME')
   }
 
   environment {
