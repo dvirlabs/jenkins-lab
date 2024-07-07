@@ -19,6 +19,6 @@ pipeline {
   }
 
   environment {
-    DOCKER_REGISTRY = 'https://index.docker.io/v1/'
+    DOCKER_REGISTRY = 'https://index.docker.io/v1/' 
   }
 }
