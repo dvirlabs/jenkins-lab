@@ -4,22 +4,21 @@ pipeline {
   stages {
     stage('Pull base image') {
       steps {
-        // sh "docker login -u dvirlabs -p ${DOCKER_TOKEN}"
-        docker.image('dvirlabs/jenkins-httpd:v1').pull() 
+        // This line is corrected
+        docker.image('dvirlabs/jenkins-httpd:v1').pull()
       }
     }
     stage('Build new image') {
-      steps { 
+      steps {
         script {
-          def image = docker.build(imageName: "dvirlabs/jenkins-httpd:${env.BUILD_ID}", credentialsId: 'Docker')
+          def image = docker.build(imageName: "dvirlabs/jenkins-httpd:${env.BUILD_ID}")
           image.push()
         }
       }
     }
   }
 
-  environment { 
+  environment {
     DOCKER_REGISTRY = 'https://index.docker.io/v1/'
-    // DOCKER_TOKEN = creden
   }
 }
