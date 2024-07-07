@@ -4,8 +4,9 @@ pipeline {
   stages {
     stage('Pull base image') {
       steps {
-        // This line is corrected
-        docker.image('dvirlabs/jenkins-httpd:v1').pull()
+        withCredentials([usernamePassword(credentialsId: 'Docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+          sh 'docker pull dvirlabs/jenkins-httpd:v1'
+        }
       }
     }
     stage('Build new image') {
@@ -18,7 +19,11 @@ pipeline {
     }
   }
 
+  credentials {
+    usernamePassword(credentialsId: 'docker-hub-credentials', username: 'USERNAME', password: 'PASSWORD')
+  }
+
   environment {
-    DOCKER_REGISTRY = 'https://index.docker.io/v1/' 
+    DOCKER_REGISTRY = 'https://index.docker.io/v1/'
   }
 }
