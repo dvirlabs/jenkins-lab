@@ -18,7 +18,7 @@ pipeline {
     }
   }
 
-  environment {
+  environment { 
     DOCKER_REGISTRY = 'https://index.docker.io/v1/'
     // DOCKER_TOKEN = creden
   }
