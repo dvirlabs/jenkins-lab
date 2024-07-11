@@ -17,12 +17,14 @@ pipeline {
         }
       }
     }
+
     stage('Push image') {
       steps {
         script {
           sh 'docker push dvirlabs/jenkins-httpd:v${BUILD_NUMBER}'
         }
       }
+    }
   }
 
   environment {
