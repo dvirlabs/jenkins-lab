@@ -18,8 +18,7 @@ pipeline {
     stage('Build new image') {
       steps {
         script {
-          def myEnv = env.DOCKER_REGISTRY
-          echo '=== ${DOCKER_REGISTRY} ==='
+          echo "Global variable value: ${env.TEST}"
           sh 'docker build -t dvirlabs/jenkins-httpd:v${BUILD_NUMBER} .'
         }
       }
