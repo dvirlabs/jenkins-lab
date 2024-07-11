@@ -19,7 +19,7 @@ pipeline {
       steps {
         script {
           def myEnv = env.DOCKER_REGISTRY
-          echo '=== ${DOCKER_REGISTRY} ==='
+          echo '=== $DOCKER_REGISTRY ==='
           sh 'docker build -t dvirlabs/jenkins-httpd:v${BUILD_NUMBER} .'
         }
       }
