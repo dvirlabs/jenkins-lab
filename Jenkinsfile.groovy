@@ -1,6 +1,11 @@
 pipeline {
   agent any
 
+  environment {
+    DOCKER_REGISTRY = 'https://index.docker.io/v1/'
+    SECRET_TEXT = credentials('Docker')
+  }
+  
   stages {
     stage('Pull base image') {
       steps {
@@ -27,8 +32,4 @@ pipeline {
     }
   }
 
-  environment {
-    DOCKER_REGISTRY = 'https://index.docker.io/v1/'
-    SECRET_TEXT = credentials('Docker')
-  }
 }
