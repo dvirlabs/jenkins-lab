@@ -14,6 +14,7 @@ pipeline {
       steps {
         script {
           def image = docker.build(imageName: "dvirlabs/jenkins-httpd:${env.BUILD_ID}")
+          sh 'docker images'
           image.push()
         }
       }
