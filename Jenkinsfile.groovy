@@ -13,9 +13,7 @@ pipeline {
     stage('Build new image') {
       steps {
         script {
-          def image = docker.build(imageName: "dvirlabs/jenkins-httpd:${env.BUILD_ID}")
-          sh 'docker images'
-          image.push()
+          sh 'docker build -t dvirlabs/jenkins-httpd:v${BUILD_NUMBER} .'
         }
       }
     }
