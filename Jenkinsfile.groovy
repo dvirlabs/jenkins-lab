@@ -12,14 +12,14 @@ pipeline {
         withCredentials([string(credentialsId: 'Docker', variable : 'SECRET_TEXT')]) {
           sh 'docker login -u dvirlabs -p $SECRET_TEXT'
           sh 'docker pull dvirlabs/jenkins-httpd:v1'
-          def myEnv = env.DOCKER_REGISTRY
-          echo '=== ${DOCKER_REGISTRY} ==='
         }
       }
     }
     stage('Build new image') {
       steps {
         script {
+          def myEnv = env.DOCKER_REGISTRY
+          echo '=== ${DOCKER_REGISTRY} ==='
           sh 'docker build -t dvirlabs/jenkins-httpd:v${BUILD_NUMBER} .'
         }
       }
