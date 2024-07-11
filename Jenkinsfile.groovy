@@ -11,7 +11,7 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'Docker', variable : 'SECRET_TEXT')]) {
           sh 'docker login -u dvirlabs -p $SECRET_TEXT'
-          sh 'docker pull dvirlabs/jenkins-httpd:v1'
+          sh 'docker pull ${MY_DOCKERHUB_REGISTRY}/jenkins-httpd:v1'
         }
       }
     }
@@ -26,7 +26,7 @@ pipeline {
     stage('Push image') {
       steps {
         script {
-          sh 'docker push dvirlabs/jenkins-httpd:v${BUILD_NUMBER}'
+          sh 'docker push ${MY_DOCKERHUB_REGISTRY}/jenkins-httpd:v${BUILD_NUMBER}'
         }
       }
     }
