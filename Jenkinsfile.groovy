@@ -18,8 +18,7 @@ pipeline {
     stage('Build new image') {
       steps {
         script {
-          echo "Global variable value: ${env.TEST}"
-          sh 'docker build -t dvirlabs/jenkins-httpd:v${BUILD_NUMBER} .'
+          sh 'docker build -t ${MY_DOCKERHUB_REGISTRY}/jenkins-httpd:v${BUILD_NUMBER} .'
         }
       }
     }
