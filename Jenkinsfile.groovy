@@ -4,7 +4,8 @@ pipeline {
   stages {
     stage('Pull base image') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'Docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        withCredentials([string(credentialsId: 'Docker', variable : 'SECRET_TEXT')]) {
+          sh 'docker login -u dvirlabs -p $SECRET_TEXT'
           sh 'docker pull dvirlabs/jenkins-httpd:v1'
         }
       }
@@ -19,12 +20,8 @@ pipeline {
     }
   }
 
-  // Move the credentials section here
-  credentials {
-    usernamePassword(credentialsId: 'Docker', username: 'USERNAME', password: 'USERNAME')
-  }
-
   environment {
     DOCKER_REGISTRY = 'https://index.docker.io/v1/'
+    SECRET_TEXT = credentials('Docker')
   }
 }
